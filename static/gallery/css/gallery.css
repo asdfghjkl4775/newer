@@ -1,0 +1,507 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@500;600;700&display=swap");
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
+}
+body div {
+  font-family: 'Pretendard-Regular', sans-serif;
+}
+
+button {
+    font-family: 'Pretendard-Regular';
+}
+
+
+#discover_filter {
+    max-width: 1152px;
+    /*margin-top: 100px;*/
+    margin: 10px auto 0;
+    position: relative;
+    overflow: hidden;
+    line-height: 1;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.cf {
+    display:block;
+}
+
+#ds-filter-container-pc .ds-filter-item {
+    border-top: 1px solid #dfdfdf;
+    border-right: 1px solid #dfdfdf;
+    border-bottom: 0;
+    border-left: 7px solid #FDB56D;
+    float: left;
+    width: 100%;
+    height: 70px;
+    box-sizing: border-box;
+}
+#ds-filter-container-pc .ds-filter-item:nth-child(1), #ds-filter-container-pc .ds-filter-item:nth-child(2) {
+    width: 50%;
+}
+#ds-filter-container-pc .ds-filter-item:nth-child(3), #ds-filter-container-pc .ds-filter-item:nth-child(4) {
+    width: 50%;
+}
+#ds-filter-container-pc .ds-filter-item:nth-child(5), #ds-filter-container-pc .ds-filter-item:nth-child(6) {
+    width: 50%;
+}
+
+
+#ds-filter-container-pc .ds-filter-item.size {
+    height: 90px;
+    overflow: hidden;
+}
+
+#ds-filter-container-pc .ds-filter-item.shape {
+    height: 90px;
+}
+
+#ds-filter-container-pc .ds-filter-item.price {
+    height: 95px;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+/*#ds-filter-container-pc .ds-filter-item.shape, #ds-filter-container-pc .ds-filter-item.price {
+    height: 95px;
+}*/
+
+#ds-filter-container-pc .ds-filter-item:last-child {
+    border-bottom: 1px solid #dfdfdf;
+}
+#ds-filter-container-pc .ds-filter-title {
+    float: left;
+    font-size: 15px;
+    color: #222;
+    font-weight: bold;
+    padding-left: 14px;
+    width: 86px;
+    height: 100%;
+    padding-top: 16px;
+    box-sizing: border-box;
+    position: relative;
+}
+#ds-filter-container-pc .ds-filter-tags {
+    float: left;
+    height: auto;
+    padding: 10px 0 10px 20px;
+    box-sizing: border-box;
+    max-width: 88%;
+    max-width: -webkit-calc(100% - 120px);
+    max-width: -moz-calc(100% - 120px);
+    max-width: calc(100% - 120px);
+}
+#ds-filter-container-pc .ds-filter-tag-theme {
+    float: left;
+    width: auto;
+    height: 40px;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 14px;
+}
+
+#ds-filter-container-mobile .ds-filter-tag-theme {
+    float: left;
+    width: auto;
+    height: 40px;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 14px;
+}
+#ds-filter-container-pc .ds-filter-tag-color {
+    float: left;
+    width: 36px;
+    height: 36px;
+    position: relative;
+    margin-right: 14px;
+}
+#ds-filter-container-mobile .ds-filter-tag-color {
+    float: left;
+    width: 36px;
+    height: 36px;
+    position: relative;
+    margin-right: 14px;
+}
+
+#completeButton {
+    position: absolute;
+    width: 150px;
+    top: 10%;
+    left: 80px;
+}
+#completeButton1 {
+    position: absolute;
+    width: 150px;
+    top: 10%;
+    left: 80px;
+}
+#ds-filter-container-pc .ds-filter-tag-size {
+    float: left;
+    width: auto;
+    min-width: 128px;
+    height: 60px;
+    box-sizing: border-box;
+    position: relative;
+    margin: 2px 14px 10px 0;
+}
+#ds-filter-container-mobile .ds-filter-tag-size {
+    float: left;
+    width: auto;
+    min-width: 128px;
+    height: 60px;
+    box-sizing: border-box;
+    position: relative;
+    margin: 2px 14px 10px 0;
+}
+
+#ds-filter-container-pc .ds-filter-tag-shape {
+    float: left;
+    width: auto;
+    height: 30px;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 14px;
+}
+#ds-filter-container-mobile .ds-filter-tag-shape {
+    float: left;
+    width: auto;
+    height: 30px;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 14px;
+}
+
+#ds-filter-container-pc .ds-filter-tag-price {
+    float: left;
+    width: auto;
+    height: 30px;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 14px;
+}
+#ds-filter-container-mobile .ds-filter-tag-price {
+    float: left;
+    width: auto;
+    height: 30px;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 14px;
+}
+
+.checkbox-group {
+    display: none;
+}
+input[type="radio"][name="artType"]:checked ~ .checkbox-group {
+    display: block;
+}
+.checkbox1 {
+    list-style: none;
+    margin: 0px;
+}
+#rgbValue {
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    width: 200px;
+}
+#rgbValue1 {
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    width: 200px;
+}
+#ds-filter-container-pc .ds-filter-tag-technique {
+    float: left;
+    width: auto;
+    height: 40px;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 14px;
+}
+
+#ds-filter-container-mobile .ds-filter-tag-technique {
+    float: left;
+    width: auto;
+    height: 40px;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 14px;
+}
+#ds-filter-container-pc .ds-filter-tag-author {
+    float: left;
+    width: auto;
+    height: 40px;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 14px;
+}
+#ds-filter-container-mobile .ds-filter-tag-author {
+    float: left;
+    width: auto;
+    height: 40px;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 14px;
+}
+#slider-container {
+    width: 80%;
+    margin: 50px auto;
+    position: absolute;
+}
+#slider-container1 {
+    width: 80%;
+    margin: 50px auto;
+    position: absolute;
+}
+#slider {
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to right, #FEEBCD 0%, #FEEBCD 0%, #ddd 0%);
+    position: absolute;
+    cursor: pointer;
+}
+#slider1 {
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to right, #FEEBCD 0%, #FEEBCD 0%, #ddd 0%);
+    position: absolute;
+    cursor: pointer;
+}
+#knob {
+    width: 15px;
+    height: 15px;
+    background-color: #FEEBCD;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+#knob1 {
+    width: 12px;
+    height: 12px;
+    background-color: #FEEBCD;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+#slider-label {
+    position: absolute;
+    width: 80px;
+    top: 0;
+    left: 0;
+}
+#slider-label1 {
+    position: absolute;
+    width: 80px;
+    top: 0;
+    left: 0;
+}
+.tick {
+    position: absolute;
+    height: 5px;
+    width: 1px;
+    background-color: #333;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.tick-label {
+    position: absolute;
+    top: 100%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: gray;
+}
+#knob {
+    position: absolute;
+    top: -1px;
+    width: 40px; /* 노브의 지름을 크게 조정합니다. */
+    height: 40px; /* 노브의 지름을 크게 조정합니다. */
+    background: #FEEBCD;
+    border-radius: 50%;
+    cursor: pointer;
+}
+#knob1 {
+    position: absolute;
+    top: -1px;
+    width: 40px; /* 노브의 지름을 크게 조정합니다. */
+    height: 40px; /* 노브의 지름을 크게 조정합니다. */
+    background: #FEEBCD;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.display-flex {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.position-relative {
+    position: relative;
+}
+
+.cf {
+    display: block;
+}
+
+.cf:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+}
+#ds-filter-container-mobile{
+    display: none;
+}
+
+@media screen and (max-width: 1041px) {
+    #ds-filter-container-pc .ds-filter-item {
+        display: flex;
+        flex-direction: row;  // 요소들을 수평 방향으로 유지
+        flex-wrap: wrap;  // 내용이 많아질 경우 다음 줄로 자동 이동
+        align-items: center;  // 요소들을 중앙 정렬
+        padding: 5px;  // 패딩 감소
+        width: 100%;  // 부모 컨테이너에 맞춰 조절
+        box-sizing: border-box;
+        min-height: 100px;  // 최소 높이 설정
+    }
+
+    #ds-filter-container-pc .ds-filter-item.price {
+        height: 80px;
+    }
+
+    #slider-container {
+        top: 73%;
+    }
+    #slider-container1 {
+        top: 80%;
+    }
+    #ds-filter-container-pc .ds-filter-title {
+        flex: 0 0 100px;  // 타이틀은 고정된 너비를 유지
+        margin-bottom: 0;  // 제목과 태그 사이 간격 제거
+        font-size: 14px;  // 폰트 크기 감소
+    }
+
+    #ds-filter-container-pc .ds-filter-tags {
+        flex: 1 1 auto;  // 태그 영역은 남은 공간을 유동적으로 차지
+        padding-left: 10px;  // 타이틀과 태그 사이 간격 추가
+        font-size: 12px;  // 폰트 크기 감소
+    }
+
+    #ds-filter-container-pc .ds-filter-tag {
+        flex: 1 1 20%;  // 각 태그는 유동적으로 너비 조정, 최소 20% 너비
+        margin-right: 5px;  // 태그 사이 간격 조정
+        margin-bottom: 5px;  // 줄 바꿈 발생 시 간격 유지
+    }
+
+    #ds-filter-container-pc .ds-filter-tag-shape {
+        min-width: 50px;  // 감성 태그 최소 너비 설정
+        padding: 2px 5px;  // 감성 태그 내부 패딩 감소
+    }
+
+}
+
+#ds-filter-container-mobile{
+    display: none;
+}
+@media screen and (max-width: 760px) {
+    #ds-filter-container-mobile {
+        display: block;
+    }
+    #ds-filter-container-pc{
+        display:none;
+    }
+    #ds-filter-container-mobile .ds-filter-title.active {
+        border-top: 5px solid #FDB56D;
+        background-color: #fff;
+        border-bottom: 0;
+        font-weight: bold;
+        color: #222;
+    }
+    #slider-container {
+        top: 28%;
+    }
+    #slider-container1 {
+        display:none;
+        top: 28%;
+    }
+
+    #ds-filter-container-mobile .ds-filter-title:nth-child(1) {
+        border-left: 0;
+    }
+    #ds-filter-container-mobile .ds-filter-title {
+        float: left;
+        width: 25%;
+        background-color: #fafafa;
+        font-size: 15px;
+        text-align: center;
+        height: 50px;
+        line-height: 52px;
+        border: 1px solid #dfdfdf;
+        border-right: 1px solid #dfdfdf;
+    }
+    #ds-filter-container-mobile .ds-filter-content {
+        height: 100px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        border-bottom: 1px solid #dfdfdf;
+    }
+    #ds-filter-container-mobile .ds-filter-content > .m-price {
+        height: 130px;
+    }
+    #ds-filter-container-mobile .ds-filter-tags.active {
+        display: block;
+    }
+    #ds-filter-container-mobile .ds-filter-tags {
+        display: none;
+        padding: 16px 20px 0 20px;
+        position: absolute;
+        top: 0;
+        bottom: -17px;
+        left: 0;
+        right: 0;
+        overflow: auto;
+        white-space: nowrap;
+    }
+    #ds-filter-container-mobile .ds-filter-tags[data-index="2"] {
+        padding-top: 28px;
+    }
+    #ds-filter-container-mobile .ds-filter-tags[data-index="3"] {
+        padding-top: 14px;
+    }
+}
+
+.select_button {
+    margin-top: 35px;
+    text-align: center;
+}
+
+.ds-filter-tag-theme .checkbox1 > li div {
+    float:left;
+    margin-left: 5px;
+}
+#knob2 {
+    position: absolute;
+    top:-20px;
+    width: 40px;
+    height: 40px;
+    background: #FEEBCD;
+    border-radius: 50%;
+    cursor: pointer;
+}
+@media (max-width: 510px) {
+    #slider-container1 {
+        display:none;
+    }
+}
+#knob-unique2 {
+    background:black;
+}

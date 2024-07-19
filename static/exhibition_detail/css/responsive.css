@@ -1,0 +1,55 @@
+@media (max-width: 768px) {
+    .newsletter-widget .btn {
+        display: block;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    .topbar-section .text-right {
+        text-align: center !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .header .dropdown-menu {
+        margin-top: 13px;
+    }
+    .header .navbar-nav .has-submenu {
+        position: relative;
+    }
+    .header .navbar-nav .has-submenu:hover > ul {
+        visibility: visible;
+        opacity: 1;
+        top: 100%;
+    }
+    .header .navbar-nav .has-submenu ul {
+        transition: visibility 0.35s ease-in-out, opacity 0.35s ease-in-out, top 0.35s ease-in-out;
+    }
+    .header .navbar-nav .has-submenu .dropdown-menu {
+        min-width: 180px;
+        padding: 0;
+        border-radius: 0;
+    }
+    .header .navbar-nav .has-submenu > ul {
+        position: absolute;
+        top: 130%;
+        visibility: hidden;
+        display: block;
+        opacity: 0;
+        left: 0;
+    }
+    .header .navbar-nav .has-submenu > ul.start-right {
+        right: 0;
+        left: auto;
+    }
+    .header .navbar-nav .has-submenu > ul li {
+        position: relative;
+    }
+    .header .navbar-nav .has-submenu > ul li:hover > ul {
+        visibility: visible;
+        opacity: 1;
+        left: 100%;
+    }
+    .header .navbar-nav .has-submenu > ul li:hover > ul.show-right {
+        right: 100%;
+    }
+}

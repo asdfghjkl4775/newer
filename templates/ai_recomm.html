@@ -1,0 +1,510 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>RestArt</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', path='ai_recomm/css/recommmain2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='ai_recomm/css/bootstrap-responsive.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='ai_recomm/css/prettyPhoto.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='ai_recomm/css/custom-styles.css') }}">
+    <script src="{{ url_for('static', path='ai_recomm/js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', path='ai_recomm/js/jquery.prettyPhoto.js') }}"></script>
+    <script src="{{ url_for('static', path='ai_recomm/js/jquery.custom.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="{{ url_for('static', path='ai_recomm/css/bootstrap2.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='ai_recomm/css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='ai_recomm/css/nav_top3.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='ai_recomm/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='ai_recomm/css/colors.css') }}" rel="stylesheet">
+    <style>
+        @media (max-width: 850px) {
+            #chooseFile {
+                width: 70px;
+            }
+        }
+
+        .picture-display-flex {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .addImage {
+            width: 798px;
+            height: 300px;
+            background-color: #FEEBCD;
+            border-radius: 20px 20px / 20px 20px;
+            overflow: hidden;
+            margin: 10px 0px 10px 0px;
+            z-index: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+            .addImage img {
+                width: auto !important;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .container_2 {
+            position: absolute;
+            z-index: 1;
+            top: 83%;
+            left: 44%;
+        }
+
+        .image-upload {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        #chooseFile {
+            visibility: hidden;
+        }
+
+        .buttonContainer {
+            width: 65%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+            background-color: black;
+            color: white;
+            border-radius: 30px;
+            padding: 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper2">
+        <div class="topbar-section">
+            <div class="container-fluid">
+                <div class="row2 align-items-center justify-content-end">
+                    <!-- Flexbox를 사용해 요소를 오른쪽에 정렬 -->
+                    <div id="search-ranking" class="col-auto">
+                        <!-- 실시간 검색어 -->
+                        <h2 class="blind">실시간 검색어</h2>
+                        <div class="current-rank">
+                            <span class="rank-number">1</span>
+                            <span class="rank-title">김현수</span>
+                        </div>
+                        <ul>
+                            <li>
+                                <span class="rank-number">1</span>
+                                <span class="rank-title">김현수</span>
+                            </li>
+                            <li>
+                                <span class="rank-number">2</span>
+                                <span class="rank-title">이민혁</span>
+                            </li>
+                            <li>
+                                <span class="rank-number">3</span>
+                                <span class="rank-title">이상준</span>
+                            </li>
+                            <li>
+                                <span class="rank-number">4</span>
+                                <span class="rank-title">이지원</span>
+                            </li>
+                            <li>
+                                <span class="rank-number">5</span>
+                                <span class="rank-title">이윤호</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-auto">
+                        <!-- 검색 아이콘 -->
+                        <input type="text" id="searchInput" class="form-control topsearch text-right" style="display: none;" placeholder="검색하기">
+                        <i class="fa fa-search" id="searchIcon"></i>
+                    </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const searchInput = document.getElementById('searchInput');
+                            const searchIcon = document.getElementById('searchIcon');
+
+                            searchIcon.addEventListener('click', function () {
+                                if (searchInput.style.display === "block") {
+                                    if (searchInput.value.trim() !== "") {
+                                        performSearch(searchInput.value); // 검색 실행
+                                    }
+                                } else {
+                                    searchInput.style.display = "block"; // 검색창 표시
+                                    searchInput.focus(); // 포커스를 검색창에 둠
+                                }
+                            });
+
+                            searchInput.addEventListener('keypress', function (event) {
+                                if (event.key === "Enter") {
+                                    performSearch(searchInput.value);
+                                }
+                            });
+
+                            function performSearch(query) {
+                                console.log("검색어: ", query); // 실제 구현에서는 검색 결과 페이지로 리다이렉트 등의 로직 추가
+                                // 예: window.location.href = '/search?query=' + encodeURIComponent(query);
+                            }
+
+                            // 추가된 부분: 문서를 클릭할 때 검색창 밖을 클릭하면 검색창을 숨김
+                            document.addEventListener('click', function (event) {
+                                const isClickInside = searchInput.contains(event.target) || searchIcon.contains(event.target);
+
+                                if (!isClickInside) {
+                                    searchInput.style.display = "none"; // 검색창 숨김
+                                }
+                            });
+                        });
+                    </script>
+
+                </div>
+            </div>
+
+        </div><!-- end topbar -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const currentRank = document.querySelector("#search-ranking .current-rank");
+                const rankItems = document.querySelectorAll("#search-ranking ul li");
+
+                let currentIndex = 0;
+
+                function showNextRank() {
+                    if (rankItems.length === 0) return; // 순위 목록이 비어있으면 아무것도 하지 않음
+
+                    currentIndex = (currentIndex + 1) % rankItems.length; // 다음 순위로 이동
+                    const rankItem = rankItems[currentIndex];
+
+                    // 현재 순위를 업데이트
+                    currentRank.innerHTML = `
+                                    <span class="rank-number">${rankItem.querySelector('.rank-number').textContent}</span>
+                                    <span class="rank-title">${rankItem.querySelector('.rank-title').textContent}</span>
+                                `;
+                }
+                setInterval(showNextRank, 3000); // 2초마다 순위를 갱신
+            });
+        </script>
+
+        <div class="header-section">
+            <div class="container">
+                <div class="row2">
+                    <div class="col-md-12">
+                        <div class="logo">
+                            <a href="index.html"><img class="logo_img" src="{{ url_for('static', path='ai_recomm/image/RestArt.png') }}" alt=""></a>
+                        </div><!-- end logo -->
+                    </div>
+                </div><!-- end row -->
+            </div><!-- end header-logo -->
+        </div><!-- end header -->
+
+        <header class="header">
+            <div class="container">
+                <nav class="navbar navbar-inverse navbar-toggleable-md">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#cloapediamenu" aria-controls="cloapediamenu" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-md-center" id="cloapediamenu">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown has-submenu">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">작가</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                                    <li><a class="dropdown-item" href="blog-author.html">작가 소개</a></li>
+                                    <li><a class="dropdown-item" href="page-contact.html">작품 등록</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown has-submenu">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">작품 보러가기</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                                    <li><a class="dropdown-item" href="blog-author.html">갤러리</a></li>
+                                    <li><a class="dropdown-item" href="page-contact.html">온라인 전시</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown has-submenu">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">AI 작품 추천</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                                    <li><a class="dropdown-item" href="blog-author.html">풍수지리</a></li>
+                                    <li><a class="dropdown-item" href="page-contact.html">AI 작품 추천</a></li>
+                                    <li><a class="dropdown-item" href="page.html">AR 인테리어</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown has-submenu">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                                    <li><a class="dropdown-item" href="blog-author.html">전시 정보</a></li>
+                                    <li><a class="dropdown-item" href="page-contact.html">인테리어 공유</a></li>
+                                    <li><a class="dropdown-item" href="page.html">리뷰</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link color-skyblue-hover" href="blog-category-03.html">아트컨설팅</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link color-skyblue-hover" href="blog-category-04.html">회사소개</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link color-skyblue-hover" href="blog-category-04.html">로그인</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div><!-- end container -->
+        </header><!-- end header -->
+
+    </div><!-- end wrapper -->
+    <!-- Core JavaScript -->
+    <script src="{{ url_for('static', path='ai_recomm/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', path='ai_recomm/js/bootstrap.min.js') }}"></script>
+
+    <!-- AI 등록 부분 -->
+    <!--<div id="dropzone">
+        <form action="https://httpbin.org/post" class="dropzone needsclick" id="demo-upload">
+            <div class="dz-message needsclick">
+                <span class="text">
+                    <h1>RestArt</h1>
+                    Drop files here or click to upload.
+                </span>
+                <span class="plus">+</span>
+            </div>
+        </form>
+    </div>-->
+    <form class="inputImage picture-display-flex" method="post" enctype="multipart/form-data">
+        <!-- 이미지 파일 데이터에 알맞는 enctype 설정 -->
+        <div class="addImage" id="image-show">
+            <!-- 이미지 띄울 공간 -->
+        </div>
+        <div class="container_2">
+            <div class="image-upload" id="image-upload">
+
+
+                <div class="button2">
+                    <label for="chooseFile">
+                        👉 CLICK HERE! 👈
+                    </label>
+                </div>
+                <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
+
+
+                <div class="fileContainer">
+                    <div class="buttonContainer">
+                        <div class="submitButton" id="submitButton">SUBMIT</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <!-- Dropzone css+js -->
+    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css" />
+    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+
+    <!-- 클러스터링 출력 -->
+    <div class="intro__cluster">
+        <section id="intro" class="main">
+            <h2>업로드한 이미지의 색 분석</h2>
+            <div class="main__img">
+                <!--<img src="{{ url_for('static', path='ai_recomm/image/1-1.jpg') }}" alt="Clustered Image" width="400" height="400">-->
+                <img src="{{ url_for('static', path='ai_recomm/image/color_an.jfif') }}" alt="Clustered Image" width="400" height="400">
+            </div>
+            <div class="text2">
+                <h1>추천된 단어:</h1>
+                <div id="words">{{ fin[0] }}, {{ fin[1] }}, {{ fin[2] }}</div>
+            </div>
+            <ul class="actions">
+                <li><a href="#" class="button big">Learn More</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- 작품 추천 파트 -->
+    <h2 class="recom_h2" style="text-align: center;">작품 추천</h2>
+    <div class="container2">
+        <div class="row">
+            <!-- Gallery Items -->
+            <div class="span12 gallery">
+                <div class="row clearfix">
+                    <ul class="gallery-post-grid holder">
+                        <!-- Gallery Item 1 -->
+                        <li class="span4 gallery-item" data-id="id-1" data-type="illustration">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/강두형_소풍가는 날.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/강두형_빛 - 산토리니.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">Custom Illustration</a>For an international add campaign.</span>
+                        </li>
+                        <!-- Gallery Item 2 -->
+                        <li class="span4 gallery-item" data-id="id-2" data-type="illustration">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/VESPER KWON_Sureness. 2.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/Kyenam (계남)_마음의 집.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">3 Color Poster Design</a>For a regional festival event.</span>
+                        </li>
+                        <!-- Gallery Item 3 -->
+                        <li class="span4 gallery-item" data-id="id-3" data-type="web">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/Pinky Jang_Rhema.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/Pinky Jang_Rhema.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">Ink Pen Illustration</a>Created for a best selling children's book.</span>
+                        </li>
+                        <!-- Gallery Item 4 -->
+                        <li class="span4 gallery-item" data-id="id-4" data-type="video">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/art 9_육면체.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/Clara Oh 현주_시노달리타스-함께하는 여정.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">Custom Illustration</a>For an international add campaign.</span>
+                        </li>
+                        <!-- Gallery Item 5 -->
+                        <li class="span4 gallery-item" data-id="id-5" data-type="web illustration">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">Icon Design</a>Classic retro style illustration.</span>
+                        </li>
+                        <!-- Gallery Item 6 -->
+                        <li class="span4 gallery-item" data-id="id-6" data-type="illustration design">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">Animation Cell</a>Creative storyboard illustration</span>
+                        </li>
+                        <!-- Gallery Item 7 -->
+                        <li class="span4 gallery-item" data-id="id-7" data-type="design">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">Poster Ad Campaign</a>Regional ad for a local company.</span>
+                        </li>
+                        <!-- Gallery Item 8 -->
+                        <li class="span4 gallery-item" data-id="id-8" data-type="web video">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">Magazine Ad</a>For an international add campaign.</span>
+                        </li>
+                        <!-- Gallery Item 9 -->
+                        <li class="span4 gallery-item" data-id="id-9" data-type="design">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">Character Designs</a>For a feature film.</span>
+                        </li>
+                        <!-- Gallery Item 10 -->
+                        <li class="span4 gallery-item" data-id="id-10" data-type="web design">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">Poster and Ad Design</a>For an international add campaign.</span>
+                        </li>
+                        <!-- Gallery Item 11 -->
+                        <li class="span4 gallery-item" data-id="id-11" data-type="illustration">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">Website and Animation</a>For a local business.</span>
+                        </li>
+                        <!-- Gallery Item 12 -->
+                        <li class="span4 gallery-item" data-id="id-12" data-type="illustration video">
+                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                <span class="gallery-icons">
+                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                    <a href="gallery-single.htm" class="item-details-link"></a>
+                                </span>
+                            </span>
+                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
+                            <span class="project-details"><a href="gallery-single.htm">Branding Design</a>For an international add campaign.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <ul>
+                        <li class="active"><a href="#">Prev</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">Next</a></li>
+                    </ul>
+                </div>
+            </div><!-- End gallery list -->
+        </div><!-- End container row -->
+    </div>
+</body>
+<script>
+    function loadFile(input) {
+        let file = input.files[0]; // 선택된 파일 가져오기
+        let newImage = document.createElement("img"); //새 이미지 추가
+
+        //이미지 source 가져오기
+        newImage.src = URL.createObjectURL(file);
+        newImage.id = "img-id"
+        /*newImage.style.width = "100%";*/
+        newImage.style.height = "100%";
+        newImage.style.objectFit = "cover";
+
+        //이미지를 image-show div에 추가
+        let container = document.getElementById('image-show');
+        container.appendChild(newImage);
+    }
+    document.getElementById("submitButton").addEventListener("click", function () {
+        // Get the second table container
+        var tableInform2 = document.getElementById("table_inform2");
+
+        // If the second table is hidden, show it; otherwise, hide it
+        if (tableInform2.style.display === "none") {
+            tableInform2.style.display = "inline-block"; // Change display to inline-block for side-by-side alignment
+        } else {
+            tableInform2.style.display = "none";
+        }
+    });
+</script>
+</html>

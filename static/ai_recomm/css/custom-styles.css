@@ -1,0 +1,183 @@
+/*html, body {
+	font-size:12px;
+	line-height:18px;
+	height: 100%;
+ }*/
+ a, a:hover { color:#d8450b; }
+/* 전체 페이지 색상 논의 */
+body {background: #f9f9f9 url(../image/page-bg-1.jpg);}
+
+@media (max-width: 767px) {
+  body { padding-right: 0px; padding-left: 0px; }
+  .container2 {margin-right: 20px; margin-left: 20px;}
+ }
+
+/* Gallery */
+.gallery-item { margin-bottom:15px; margin-top:15px; }
+
+.gallery-hover-6col,
+.gallery-hover-4col,
+.gallery-hover-3col,
+.gallery-hover-4col-cir {
+	display:none;
+	background:url(../img/gallery-item-hover.png);
+	position:absolute;
+	z-index: 10;
+}
+/* Large Desktop Size */
+@media (min-width: 1200px) {
+	.gallery-hover-6col {width:170px; height:139px;}
+	.gallery-hover-4col {width:270px; height:220px;}
+	.gallery-hover-3col {width:370px; height:300px;}
+	.gallery-hover-4col-cir {width:270px; height:270px;}
+	.gallery-hover-4col-cir .gallery-icons {top: 45%; left:34%;}
+}
+
+/* Small Desktop Size */
+@media (min-width: 980px) and (max-width: 1199px) {
+	.gallery-hover-6col {width:140px; height:114px;}
+	.gallery-hover-4col {width:220px; height:180px;}
+	.gallery-hover-3col {width:300px; height:243px;}
+	.gallery-hover-4col-cir {width:220px; height:220px;}
+	.gallery-hover-4col-cir .gallery-icons {top: 42%; left:29%;}
+
+	/* Clip descriptions */
+	li.span4 .project-details {
+	    -o-text-overflow: ellipsis;
+	    text-overflow:    ellipsis;
+	    overflow:hidden;
+	    white-space:nowrap;
+	    width: 300px;
+	}
+    .gallery {
+        margin-left: 55px;
+    }
+	.gallery-post-grid li {
+	    margin-right: 10px;
+	}
+	li.span3 .project-details {
+	    -o-text-overflow: ellipsis;
+	    text-overflow:    ellipsis;
+	    overflow:hidden;
+	    white-space:nowrap;
+	    width: 200px;
+	}
+	li.span2 .project-details {
+	    -o-text-overflow: ellipsis;
+	    text-overflow:    ellipsis;
+	    overflow:hidden;
+	    white-space:nowrap;
+	    width: 120px;
+	}
+}
+
+/* Portrait tablet to landscape */
+@media (min-width: 768px) and (max-width: 979px) {
+
+	/* Clip descriptions */
+	li.span2 .project-details {display:none;}
+	li.span3 .project-details {
+	    -o-text-overflow: ellipsis;
+	    text-overflow:    ellipsis;
+	    overflow:hidden;
+	    white-space:nowrap;
+	    width: 146px;
+	}
+	li.span4 .project-details {
+	    -o-text-overflow: ellipsis;
+	    text-overflow:    ellipsis;
+	    overflow:hidden;
+	    white-space:nowrap;
+	    width: 370px;
+	}
+}
+/* Landscape phones and down */
+@media (max-width: 767px) {
+	.project-details {width: 250px; text-align: center}
+	.gallery-post-grid {text-align: center}
+	.project-details {margin-left:auto; margin-right: auto;}
+	.gallery {text-align: center; }
+	.gallery-cats { display: none;}
+	li.span4 .project-details {
+	    -o-text-overflow: ellipsis;
+	    text-overflow:    ellipsis;
+	    overflow:hidden;
+	    white-space:nowrap;
+	    width: 368px;
+		}
+
+}
+/* Mobile Landscape Size */
+/*@media only screen and (min-width: 480px) and (max-width: 767px) {
+	li.span4 .project-details {width:350px;}
+}*/
+/* Mobile Portrait Size */
+@media only screen and (max-width: 479px) {
+	li.span4 .project-details {width:370px;}
+}
+
+.project-details {
+	background:#f8f8f8;
+	display: block;
+	padding:10px;
+	border-bottom: 1px dotted #a9a9a9;
+	font-family: Georgia;
+	font-style: italic;
+	width: auto;
+    height: auto;
+    max-width: 100%;
+}
+.project-details a {
+	margin: 0px;
+	font-size: 12px;
+	font-style: normal;
+	text-shadow:none;
+	display: block;
+	font-family: "Oswald", sans-serif;
+	font-weight: normal;
+	text-transform:uppercase;
+}
+.project-details {color: #6f6f6f;}
+.project-details a {color: #333333;}
+.project-details a:hover {color:#d8450b; text-decoration: none;}
+
+.gallery-icons {
+	z-index: 9;
+	position:absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 89px;
+	height: 42px;
+	display: block;
+}
+a.item-zoom-link {
+	height: 42px;
+	width: 42px;
+	background: #ffffff url(../img/gallery-item-icons.png) no-repeat;
+	background-position: 0px 0px;
+	position:absolute;
+	display: block;
+}
+a.item-details-link {
+	height: 42px;
+	width: 42px;
+	background: #ffffff url(../img/gallery-item-icons.png) no-repeat;
+	background-position: -42px 0px;
+	position:absolute;
+	left: 47px;
+	display: block;
+}
+a.item-zoom-link:hover {background: #d8450b url(../img/gallery-item-icons.png) no-repeat;}
+a.item-details-link:hover {background: #d8450b url(../img/gallery-item-icons.png) no-repeat; background-position: -42px 0px;}
+
+.gallery-post-grid {margin:0px;}
+.gallery-post-grid li {list-style: none; float: left; text-align: center; margin-bottom: 30px;}
+
+.gallery-cats {margin: 0px 0px 20px 0px;}
+.gallery-cats li{
+	list-style: none;
+	float: left;
+	padding: 0px 10px;
+	border-left: 1px dotted #a9a9a9;
+}
+.gallery-cats li:first-child{border-left:0px;}
