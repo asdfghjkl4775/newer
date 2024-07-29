@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.requests import Request
 from starlette.responses import HTMLResponse
+import os
 
 
 app = FastAPI()
