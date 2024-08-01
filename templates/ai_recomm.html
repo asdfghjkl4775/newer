@@ -111,85 +111,86 @@
     </style>
 </head>
 <body style="background: white">
-    <div id="wrapper2" style="height: 100px; font-size: 40px; align-content: center; text: black; padding: 30px; background: white">
-        RestArt
-    </div>
-    <form class="inputImage picture-display-flex" method="post" enctype="multipart/form-data" style="background: white" id="uploadForm">
-        <!-- 이미지 파일 데이터에 알맞는 enctype 설정 -->
-        <div class="addImage" id="image-show" style="border-bottom: 2px solid #6699FF; border-right: 2px solid #3366FF; border-left: 2px solid #99CCFF;">
-            <!-- 이미지 띄울 공간 -->
-        </div>
-        <div class="container_2">
-            <div class="image-upload" id="image-upload">
-                <div class="button2">
-                    <label for="chooseFile">
-                        👉 CLICK HERE! 👈
-                    </label>
-                </div>
-                <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
-                <div class="fileContainer">
-                    <div class="buttonContainer">
-                        <button onclick="selectRandomImage()" type="submit" id="submitButton">SUBMIT</button>
+    <a href="{{ url_for('main_page') }}">
+        <div id="wrapper2" style="height: 100px; font-size: 40px; align-content: center; text: black; padding: 30px; background: white">
+            RestArt
+        </div></a>
+        <form class="inputImage picture-display-flex" method="post" enctype="multipart/form-data" style="background: white" id="uploadForm">
+            <!-- 이미지 파일 데이터에 알맞는 enctype 설정 -->
+            <div class="addImage" id="image-show" style="border-bottom: 2px solid #6699FF; border-right: 2px solid #3366FF; border-left: 2px solid #99CCFF;">
+                <!-- 이미지 띄울 공간 -->
+            </div>
+            <div class="container_2">
+                <div class="image-upload" id="image-upload">
+                    <div class="button2">
+                        <label for="chooseFile">
+                            👉 CLICK HERE! 👈
+                        </label>
                     </div>
+                    <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
+                    <div class="fileContainer">
+                        <div class="buttonContainer">
+                            <button onclick="selectRandomImage()" type="submit" id="submitButton">SUBMIT</button>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
+        </form>
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
+        <!-- Dropzone css+js -->
+        <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css" />
+        <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+
+        <!-- 클러스터링 출력 -->
+        <div class="intro__cluster" style="background-color: white; padding: 40px 40px 10px 40px; display: none">
+            <section id="intro" class="main">
+                <h2>업로드한 이미지의 색 분석</h2>
+                <div class="main__img">
+                    <img id="randomImage" src="" alt="Clustered Image" width="400" height="400">
+                </div>
+                <div class="text2">
+                    <h1>추천된 단어 : </h1>
+                    <h1>{{ fin[0] }}, {{ fin[1] }}, {{ fin[2] }}</h1>
+                </div>
+            </section>
         </div>
-    </form>
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
-    <!-- Dropzone css+js -->
-    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css" />
-    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
-
-    <!-- 클러스터링 출력 -->
-    <div class="intro__cluster" style="background-color: white; padding: 40px 40px 10px 40px; display: none">
-        <section id="intro" class="main">
-            <h2>업로드한 이미지의 색 분석</h2>
-            <div class="main__img">
-                <img id="randomImage" src="" alt="Clustered Image" width="400" height="400">
-            </div>
-            <div class="text2">
-                <h1>추천된 단어 : </h1>
-                <h1>{{ fin[0] }}, {{ fin[1] }}, {{ fin[2] }}</h1>
-            </div>
-        </section>
-    </div>
-    <!-- 작품 추천 파트 -->
-    <h2 class="recom_h2" style="text-align: center; margin: 30px 0 50px 0;">작품 추천</h2>
-    <div class="container2" id="container2">
-        <div class="row">
-            <!-- Gallery Items -->
-            <div class="span12 gallery">
-                <div class="row clearfix">
-                    <ul class="gallery-post-grid holder">
-                        <!-- Gallery Item 1 -->
-                        <li class="span4 gallery-item" data-id="id-1" data-type="illustration">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/강두형_소풍가는 날.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
+        <!-- 작품 추천 파트 -->
+        <h2 class="recom_h2" style="text-align: center; margin: 30px 0 50px 0;">작품 추천</h2>
+        <div class="container2" id="container2">
+            <div class="row">
+                <!-- Gallery Items -->
+                <div class="span12 gallery">
+                    <div class="row clearfix">
+                        <ul class="gallery-post-grid holder">
+                            <!-- Gallery Item 1 -->
+                            <li class="span4 gallery-item" data-id="id-1" data-type="illustration">
+                                <span class="gallery-hover-3col hidden-phone hidden-tablet">
+                                    <span class="gallery-icons">
+                                        <a href="{{ url_for('static', path='ai_recomm/image/gallery/강두형_소풍가는 날.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+                                        <a href="gallery-single.htm" class="item-details-link"></a>
+                                    </span>
                                 </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/강두형_빛 - 산토리니.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">Custom Illustration</a>For an international add campaign.</span>
-                        </li>
-                        <!-- Pagination -->
-                        <div class="pagination">
-                            <ul>
-                                <li class="active"><a href="#">Prev</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">Next</a></li>
-                            </ul>
-                        </div>
-                </div><!-- End gallery list -->
-            </div><!-- End container row -->
-        </div>
+                                <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/강두형_빛 - 산토리니.jpg') }}" alt="Gallery"></a>
+                                <span class="project-details"><a href="gallery-single.htm">Custom Illustration</a>For an international add campaign.</span>
+                            </li>
+                            <!-- Pagination -->
+                            <div class="pagination">
+                                <ul>
+                                    <li class="active"><a href="#">Prev</a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                            </div>
+                    </div><!-- End gallery list -->
+                </div><!-- End container row -->
+            </div>
 </body>
 <script>
     function loadFile(input) {
