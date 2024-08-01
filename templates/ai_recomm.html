@@ -4,7 +4,7 @@
     <title>RestArt</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <!--<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
     <link rel="stylesheet" href="{{ url_for('static', path='ai_recomm/css/recommmain2.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='ai_recomm/css/bootstrap-responsive.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='ai_recomm/css/prettyPhoto.css') }}">
@@ -85,46 +85,46 @@
             font-size: 0.8em;
             cursor: pointer;
         }
+
+        .gallery-item img {
+            width: 100%; /* 이미지 너비를 컨테이너의 100%로 설정 */
+            height: 200px; /* 고정 높이 설정 */
+            object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 하면서 종횡비 유지 */
+            border-radius: 10px; /* 이미지에 둥근 모서리 효과 적용 */
+        }
+
+        .gallery-item {
+            margin-bottom: 20px; /* 갤러리 아이템 간의 간격 조정 */
+            background: #f8f8f8; /* 배경색 설정 */
+            padding: 10px; /* 패딩 설정 */
+            border: 1px solid #eaeaea; /* 테두리 설정 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 그림자 효과 */
+        }
     </style>
 </head>
 <body style="background: white">
     <div id="wrapper2" style="height: 100px; font-size: 40px; align-content: center; text: black; padding: 30px; background: white">
         RestArt
-    </div><!-- end wrapper -->
-    <!-- AI 등록 부분 -->
-    <!--<div id="dropzone">
-        <form action="https://httpbin.org/post" class="dropzone needsclick" id="demo-upload">
-            <div class="dz-message needsclick">
-                <span class="text">
-                    <h1>RestArt</h1>
-                    Drop files here or click to upload.
-                </span>
-                <span class="plus">+</span>
-            </div>
-        </form>
-    </div>-->
-    <form class="inputImage picture-display-flex" method="post" enctype="multipart/form-data" style="background: white">
+    </div>
+    <form class="inputImage picture-display-flex" method="post" enctype="multipart/form-data" style="background: white" id="uploadForm">
         <!-- 이미지 파일 데이터에 알맞는 enctype 설정 -->
         <div class="addImage" id="image-show" style="border-bottom: 2px solid #6699FF; border-right: 2px solid #3366FF; border-left: 2px solid #99CCFF;">
             <!-- 이미지 띄울 공간 -->
         </div>
         <div class="container_2">
             <div class="image-upload" id="image-upload">
-
-
                 <div class="button2">
                     <label for="chooseFile">
                         👉 CLICK HERE! 👈
                     </label>
                 </div>
                 <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
-
-
                 <div class="fileContainer">
                     <div class="buttonContainer">
-                        <div class="submitButton" id="submitButton">SUBMIT</div>
+                        <button  onclick="selectRandomImage()" type="submit" id="submitButton">SUBMIT</button>
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -141,19 +141,14 @@
         <section id="intro" class="main">
             <h2>업로드한 이미지의 색 분석</h2>
             <div class="main__img">
-                <!--<img src="{{ url_for('static', path='ai_recomm/image/1-1.jpg') }}" alt="Clustered Image" width="400" height="400">-->
-                <img src="{{ url_for('static', path='ai_recomm/image/color_an.jfif') }}" alt="Clustered Image" width="400" height="400">
+                <img id="randomImage" src="" alt="Clustered Image" width="400" height="400">
             </div>
             <div class="text2">
-                <h1>추천된 단어:</h1>
-                <div id="words">{{ fin[0] }}, {{ fin[1] }}, {{ fin[2] }}</div>
+                <h1>추천된 단어 : </h1>
+                <h1>{{ fin[0] }}, {{ fin[1] }}, {{ fin[2] }}</h1>
             </div>
-            <ul class="actions">
-                <li><a href="#" class="button big">Learn More</a></li>
-            </ul>
         </section>
     </div>
-
     <!-- 작품 추천 파트 -->
     <h2 class="recom_h2" style="text-align: center; margin: 30px 0 50px 0;">작품 추천</h2>
     <div class="container2" id="container2">
@@ -173,144 +168,20 @@
                             <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/강두형_빛 - 산토리니.jpg') }}" alt="Gallery"></a>
                             <span class="project-details"><a href="gallery-single.htm">Custom Illustration</a>For an international add campaign.</span>
                         </li>
-                        <!-- Gallery Item 2 -->
-                        <li class="span4 gallery-item" data-id="id-2" data-type="illustration">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/VESPER KWON_Sureness. 2.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/Kyenam (계남)_마음의 집.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">3 Color Poster Design</a>For a regional festival event.</span>
-                        </li>
-                        <!-- Gallery Item 3 -->
-                        <li class="span4 gallery-item" data-id="id-3" data-type="web">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/Pinky Jang_Rhema.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/Pinky Jang_Rhema.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">Ink Pen Illustration</a>Created for a best selling children's book.</span>
-                        </li>
-                        <!-- Gallery Item 4 -->
-                        <li class="span4 gallery-item" data-id="id-4" data-type="video">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/art 9_육면체.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/Clara Oh 현주_시노달리타스-함께하는 여정.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">Custom Illustration</a>For an international add campaign.</span>
-                        </li>
-                        <!-- Gallery Item 5 -->
-                        <li class="span4 gallery-item" data-id="id-5" data-type="web illustration">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">Icon Design</a>Classic retro style illustration.</span>
-                        </li>
-                        <!-- Gallery Item 6 -->
-                        <li class="span4 gallery-item" data-id="id-6" data-type="illustration design">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">Animation Cell</a>Creative storyboard illustration</span>
-                        </li>
-                        <!-- Gallery Item 7 -->
-                        <li class="span4 gallery-item" data-id="id-7" data-type="design">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">Poster Ad Campaign</a>Regional ad for a local company.</span>
-                        </li>
-                        <!-- Gallery Item 8 -->
-                        <li class="span4 gallery-item" data-id="id-8" data-type="web video">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">Magazine Ad</a>For an international add campaign.</span>
-                        </li>
-                        <!-- Gallery Item 9 -->
-                        <li class="span4 gallery-item" data-id="id-9" data-type="design">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">Character Designs</a>For a feature film.</span>
-                        </li>
-                        <!-- Gallery Item 10 -->
-                        <li class="span4 gallery-item" data-id="id-10" data-type="web design">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">Poster and Ad Design</a>For an international add campaign.</span>
-                        </li>
-                        <!-- Gallery Item 11 -->
-                        <li class="span4 gallery-item" data-id="id-11" data-type="illustration">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">Website and Animation</a>For a local business.</span>
-                        </li>
-                        <!-- Gallery Item 12 -->
-                        <li class="span4 gallery-item" data-id="id-12" data-type="illustration video">
-                            <span class="gallery-hover-3col hidden-phone hidden-tablet">
-                                <span class="gallery-icons">
-                                    <a href="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-full.jpg') }}" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
-                                    <a href="gallery-single.htm" class="item-details-link"></a>
-                                </span>
-                            </span>
-                            <a href="gallery-single.htm"><img src="{{ url_for('static', path='ai_recomm/image/gallery/gallery-img-1-3col.jpg') }}" alt="Gallery"></a>
-                            <span class="project-details"><a href="gallery-single.htm">Branding Design</a>For an international add campaign.</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Pagination -->
-                <div class="pagination">
-                    <ul>
-                        <li class="active"><a href="#">Prev</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">Next</a></li>
-                    </ul>
-                </div>
-            </div><!-- End gallery list -->
-        </div><!-- End container row -->
-    </div>
+                        <!-- Pagination -->
+                        <div class="pagination">
+                            <ul>
+                                <li class="active"><a href="#">Prev</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">Next</a></li>
+                            </ul>
+                        </div>
+                </div><!-- End gallery list -->
+            </div><!-- End container row -->
+        </div>
 </body>
 <script>
     function loadFile(input) {
@@ -385,4 +256,115 @@
         }
     });
 </script>
+<script>
+    document.getElementById("submitButton").addEventListener("click", function () {
+        let galleryContainer = document.querySelector('.gallery-post-grid');
+        galleryContainer.innerHTML = '';
+
+        let imagePaths = [
+            'static/ai_recomm/image/images/김복만_오메기 마을의 봄.jpg',
+            'static/ai_recomm/image/images/김선종_달항아리 봄맞이.jpg',
+            'static/ai_recomm/image/images/김선휘_무제.jpg',
+            "static/ai_recomm/image/images/김성호_repeat & life #2.jpg",
+            "static/ai_recomm/image/images/김성호_흙길 위.jpg",
+            "static/ai_recomm/image/images/김은정_화려한 날.jpg",
+            "static/ai_recomm/image/images/김일지_Somnium.jpg",
+            "static/ai_recomm/image/images/김은지_Everlasting Moment 3.jpg",
+            "static/ai_recomm/image/images/김은희_다른 시간을 향하여Ⅳ.jpg",
+            "static/ai_recomm/image/images/김이린_뾰족하지만 뾰족하지 않은 나무.jpg",
+            "static/ai_recomm/image/images/김이슬_죽성성당.jpg",
+            "static/ai_recomm/image/images/김자혜_there_s a rule in a room.jpg",
+            "static/ai_recomm/image/images/김일지_Somnium.jpg",
+            "static/ai_recomm/image/images/김자혜_comfort zone.jpg",
+            "static/ai_recomm/image/images/김정희_From the sea.jpg",
+            "static/ai_recomm/image/images/김정희_달빛소나타(2)-춤추는 달빛.jpg",
+            "static/ai_recomm/image/images/김지선_Canvas Gardening_03.jpg",
+            "static/ai_recomm/image/images/김지선_city nomad.jpg",
+            "static/ai_recomm/image/images/김지우_숲.jpg",
+            "static/ai_recomm/image/images/김지혜_WHITE FLOW 2.jpg",
+            "static/ai_recomm/image/images/김지희_정물35.jpg",
+            "static/ai_recomm/image/images/김진희_Jini Blue.jpg",
+            "static/ai_recomm/image/images/김태형_마흔살의 책상.jpg",
+            "static/ai_recomm/image/images/김태린_My Dear - 21.jpg",
+            "static/ai_recomm/image/images/김태균_펭귄들.jpg",
+            "static/ai_recomm/image/images/강두형_소풍가는 날.jpg",
+            "static/ai_recomm/image/images/강두형_빛 - 산토리니.jpg",
+            "static/ai_recomm/image/images/VESPER KWON_Sureness. 2.jpg",
+            "static/ai_recomm/image/images/TOACHI_Music makes me happy.jpg",
+            "static/ai_recomm/image/images/TOACHI_ICE CREAM II.jpg"
+        ];
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        shuffle(imagePaths);
+
+        imagePaths.forEach(function (path) {
+            let listItem = document.createElement('li');
+            listItem.className = 'span4 gallery-item';
+
+            let img = document.createElement('img');
+            img.src = path;
+            img.alt = 'Gallery';
+
+            listItem.appendChild(img);
+
+            let details = document.createElement('span');
+            details.className = 'project-details';
+            let detailLink = document.createElement('a');
+            detailLink.href = 'gallery-single.htm';
+            detailLink.textContent = 'View Details';
+            details.appendChild(detailLink);
+
+            listItem.appendChild(details);
+            galleryContainer.appendChild(listItem);
+        });
+    });
+</script>
+
+<script>
+document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+    e.preventDefault(); // Prevent the default form submission
+    const formData = new FormData(this);
+    const response = await fetch('/upload/', {
+        method: 'POST',
+        body: formData,
+    });
+    const result = await response.json();
+
+    if (response.ok) {
+        console.log('Upload successful:', result);
+        const imageShowDiv = document.getElementById('image-show');
+        imageShowDiv.innerHTML = '<img src="' + result.result_image + '" width="400" height="400" />';
+    } else {
+        console.error('Upload failed:', result);
+    }
+});
+</script>
+
+<script>
+    function selectRandomImage() {
+        const imagePaths = [
+            'static/results/cluster1.png',
+            'static/results/cluster2.png',
+            'static/results/cluster3.png',
+            'static/results/cluster4.png',
+            'static/results/cluster5.png',
+            'static/results/cluster6.png',
+            'static/results/cluster7.png'
+        ];
+
+        // 이미지 경로 중에서 랜덤으로 하나를 선택합니다.
+        const randomImagePath = imagePaths[Math.floor(Math.random() * imagePaths.length)];
+
+        // 선택된 이미지 경로로 이미지 소스를 업데이트합니다.
+        document.getElementById('randomImage').src = randomImagePath;
+    }
+</script>
+
+
 </html>
