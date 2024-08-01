@@ -7,8 +7,6 @@ import os
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 import uvicorn
-import numpy as np
-import os
 from random import sample
 
 
