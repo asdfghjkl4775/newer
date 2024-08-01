@@ -4,7 +4,7 @@
     <title>RestArt</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="{{ url_for('static', path='ai_recomm/css/recommmain2.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='ai_recomm/css/bootstrap-responsive.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='ai_recomm/css/prettyPhoto.css') }}">
@@ -73,6 +73,8 @@
         }
 
         .buttonContainer {
+            position: relative;
+            left: -70%;
             width: 65%;
             display: flex;
             justify-content: center;
@@ -85,6 +87,13 @@
             font-size: 0.8em;
             cursor: pointer;
         }
+
+            .buttonContainer #submitButton {
+                color: white;
+                background-color: black;
+                border-top: none;
+                border-left: none;
+            }
 
         .gallery-item img {
             width: 100%; /* 이미지 너비를 컨테이너의 100%로 설정 */
@@ -121,7 +130,7 @@
                 <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
                 <div class="fileContainer">
                     <div class="buttonContainer">
-                        <button  onclick="selectRandomImage()" type="submit" id="submitButton">SUBMIT</button>
+                        <button onclick="selectRandomImage()" type="submit" id="submitButton">SUBMIT</button>
                     </div>
                 </div>
 
@@ -327,23 +336,23 @@
 </script>
 
 <script>
-document.getElementById('uploadForm').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Prevent the default form submission
-    const formData = new FormData(this);
-    const response = await fetch('/upload/', {
-        method: 'POST',
-        body: formData,
-    });
-    const result = await response.json();
+    document.getElementById('uploadForm').addEventListener('submit', async function (e) {
+        e.preventDefault(); // Prevent the default form submission
+        const formData = new FormData(this);
+        const response = await fetch('/upload/', {
+            method: 'POST',
+            body: formData,
+        });
+        const result = await response.json();
 
-    if (response.ok) {
-        console.log('Upload successful:', result);
-        const imageShowDiv = document.getElementById('image-show');
-        imageShowDiv.innerHTML = '<img src="' + result.result_image + '" width="400" height="400" />';
-    } else {
-        console.error('Upload failed:', result);
-    }
-});
+        if (response.ok) {
+            console.log('Upload successful:', result);
+            const imageShowDiv = document.getElementById('image-show');
+            imageShowDiv.innerHTML = '<img src="' + result.result_image + '" width="400" height="400" />';
+        } else {
+            console.error('Upload failed:', result);
+        }
+    });
 </script>
 
 <script>
