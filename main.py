@@ -7,7 +7,6 @@ import os
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 import uvicorn
-from sklearn.cluster import KMeans
 from PIL import Image
 import numpy as np
 import os
